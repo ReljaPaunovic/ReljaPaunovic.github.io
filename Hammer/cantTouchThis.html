@@ -132,8 +132,8 @@
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px',
-        'left' : pinchPosition.left  + 'px',
-        'top' : pinchPosition.top + 'px'
+        'left' : pinchPosition.left + Math.sqrt(2) * (stemp - previousScale) / 2 + 'px',
+        'top' : pinchPosition.top + Math.sqrt(2) * (stemp - previousScale) / 2 + 'px'
 
       });
       previousScale = parseFloat($('#myElement').css('width'));
