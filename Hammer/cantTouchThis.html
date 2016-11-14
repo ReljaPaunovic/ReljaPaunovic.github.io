@@ -106,16 +106,13 @@
     mc.get('pinch').set({
       enable: true
     });
-
-
     // Draw map
     drawMap();
     // listen to events...
     mc.on("pinch", function(ev){
       alert("Pinch recognized");
-
     });
-    mc.on("pan", function(ev) {
+    /*mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
@@ -148,7 +145,7 @@
         'left': cumulativeDeltaPosition.left + 'px',
         'top' : cumulativeDeltaPosition.top + 'px'
       });
-    });
+    });*/
   </script>
 </body>
 </html>
