@@ -105,7 +105,7 @@
 
     mc.on("pan", function(ev) {
       //prevent default action
-      event.gesture.preventDefault();
+      //event.gesture.preventDefault();
       var bla = document.getElementById('bla');
       bla.textContent = deltaPosition.left;
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
