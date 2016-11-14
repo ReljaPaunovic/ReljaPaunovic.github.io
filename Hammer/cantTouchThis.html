@@ -109,25 +109,22 @@
     // Draw map
     drawMap();
     // listen to events...
-    var scale = parseFloat($('#myElement').css('width'));
-    var i = 0;
+    var scaleInPixels = parseFloat($('#myElement').css('width'));
+    var scaleInPixelsPrevious = parseFloat($('#myElement').css('width'));
     mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
-      scale = parseFloat($('#myElement').css('width'));
-      i += 1;
-    });
-    mc.on("pinchend", function(ev){
-      alert(i);
+      scaleInPixels = parseFloat($('#myElement').css('width'));
     });
     mc.on("pinchstart", function(ev){
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
-        'height': scale + 'px', 'width' : scale + 'px'
+        'height': scaleInPixels + scaleInPixels/scaleInPixelsPrevious + 'px', 'width' : scaleInPixels + 'px'
       });
+      scaleInPixelsPrevious = parseFloat($('#myElement').css('width'));
     });/*
     mc.on("pan", function(ev) {
       //prevent default action
