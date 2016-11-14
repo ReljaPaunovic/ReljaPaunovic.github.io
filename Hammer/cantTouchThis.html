@@ -112,11 +112,11 @@
     var scale = 1;
     var i = 0;
     mc.on("pinch", function(ev){
-      alert("Pinch recognized" + ev.scale + " : " + ev.scale);
+      //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
-      scale = ev.scale;
+      scale = scale * ev.scale;
       //i += 1;
     });
     mc.on("pinchend", function(ev){
@@ -124,12 +124,12 @@
     });
     mc.on("pinchstart", function(ev){
       //scale = scale / i;
-      /*i = 0;
+      i = 0;
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': height * scale, 'width' : width * scale
-      });*/
+      });
     });/*
     mc.on("pan", function(ev) {
       //prevent default action
