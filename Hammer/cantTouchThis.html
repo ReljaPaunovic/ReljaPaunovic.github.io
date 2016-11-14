@@ -118,15 +118,16 @@
       scale = ev.scale;
     });
     mc.on("pinchend", function(ev){
+
+    });
+    mc.on("pan", function(ev) {
+      //prevent default action
+      //event.gesture.preventDefault();
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': scale * height , 'width' : scale * width
       });
-    });
-    mc.on("pan", function(ev) {
-      //prevent default action
-      //event.gesture.preventDefault();
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
