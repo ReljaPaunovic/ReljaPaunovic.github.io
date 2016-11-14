@@ -120,13 +120,7 @@
       i = i + 1;
     });
     mc.on("pinchend", function(ev){
-      scale = scale / i;
-      i = 0;
-      var width = parseFloat($('#myElement').css('width'));
-      var height = parseFloat($('#myElement').css('height'));
-      $("#myElement").css({
-        'height': scale * height , 'width' : scale * width
-      });
+      
     });
     mc.on("pan", function(ev) {
       //prevent default action
