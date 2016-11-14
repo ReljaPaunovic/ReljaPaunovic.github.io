@@ -120,14 +120,9 @@
       i += 1;
     });
     mc.on("pinchend", function(ev){
-
+      alert(i);
     });
-    var k = 0;
     mc.on("pinchstart", function(ev){
-      if (k != 0){
-        alert(i);
-        k = 1;
-      }
       scale = scale / i;
       i = 0;
       var width = parseFloat($('#myElement').css('width'));
