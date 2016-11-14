@@ -110,24 +110,28 @@
     drawMap();
     // listen to events...
     var scale = 1;
+    var i = 0;
     mc.on("pinch", function(ev){
       //alert("Pinchin recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
-      scale = ev.scale;
+      scale += ev.scale;
+      i = i + 1;
     });
     mc.on("pinchend", function(ev){
-
-    });
-    mc.on("pan", function(ev) {
-      //prevent default action
-      //event.gesture.preventDefault();
+      scale = scale / i;
+      i = 0;
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': scale * height , 'width' : scale * width
       });
+    });
+    mc.on("pan", function(ev) {
+      //prevent default action
+      //event.gesture.preventDefault();
+
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
