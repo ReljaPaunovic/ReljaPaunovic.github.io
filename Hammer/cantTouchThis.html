@@ -116,7 +116,7 @@
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
-      scale *= ev.scale;
+      scale = ev.scale;
     });
     mc.on("pinchend", function(ev){
 
