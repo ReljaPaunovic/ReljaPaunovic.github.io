@@ -116,20 +116,20 @@
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
-      scale += ev.scale;
-      i += 1;
+      scale = ev.scale;
+      //i += 1;
     });
     mc.on("pinchend", function(ev){
 
     });
     mc.on("pinchstart", function(ev){
-      scale = scale / i;
-      i = 0;
+      //scale = scale / i;
+      /*i = 0;
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': height * scale, 'width' : width * scale
-      });
+      });*/
     });
     mc.on("pan", function(ev) {
       //prevent default action
@@ -161,9 +161,12 @@
     mc.on("panstart", function() {
       console.log(cumulativeDeltaPosition.left);
       console.log(cumulativeDeltaPosition.top);
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'left': cumulativeDeltaPosition.left + 'px',
-        'top' : cumulativeDeltaPosition.top + 'px'
+        'top' : cumulativeDeltaPosition.top + 'px',
+        'height' : height * scale, 'width': width * scale
       });
     });
   </script>
