@@ -110,6 +110,7 @@
     drawMap();
     // listen to events...
     var scaleInPixels = parseFloat($('#myElement').css('width'));
+    var stemp = 0;
     var previousScale = 0;
     var pinchPosition = {'left' : initialPosition.left, 'top' : initialPosition.top };
     mc.on("pinch", function(ev){
@@ -122,13 +123,17 @@
       pinchPosition.top = parseFloat($('#myElement').css('top'));
 
     });
+    mc.on("pinchend", function(ev){
+      stemp = scaleInPixels;
+
+    });
     mc.on("pinchstart", function(ev){
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px',
-        'left' : pinchPosition.left + (previousScale - scaleInPixels) / 2 + 'px',
-        'top' : pinchPosition.top + (previousScale - scaleInPixels) / 2 + 'px'
+        'left' : pinchPosition.left + Math.sqrt(2) * (previousScale - stemp) / 2 + 'px',
+        'top' : pinchPosition.top + Math.sqrt(2) * (previousScale - stemp) / 2 + 'px'
       });
       previousScale = parseFloat($('#myElement').css('width'));
     });/*
