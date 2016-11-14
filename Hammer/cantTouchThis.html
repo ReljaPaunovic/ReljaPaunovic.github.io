@@ -105,7 +105,7 @@
 
     mc.on("pan", function(ev) {
       //prevent default action
-      event.gesture.preventDefault();
+      //event.gesture.preventDefault();
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
