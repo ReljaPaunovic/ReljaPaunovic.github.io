@@ -103,13 +103,13 @@
       touch: false,
       transform: false
     });
-    mc.get('pinch').set({
+    mc.get('pinchin').set({
       enable: true
     });
     // Draw map
     drawMap();
     // listen to events...
-    mc.on("pinch", function(ev){
+    mc.on("pinchin", function(ev){
       alert("Pinch recognized");
     });
     /*mc.on("pan", function(ev) {
