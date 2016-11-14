@@ -124,7 +124,7 @@
 
     });
     mc.on("pinchend", function(ev){
-      stemp += scaleInPixels;
+      stemp = scaleInPixels;
 
     });
     mc.on("pinchstart", function(ev){
@@ -136,7 +136,7 @@
         'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
 
       });
-      previousScale = parseFloat($('#myElement').css('width'));
+      //previousScale = parseFloat($('#myElement').css('width'));
     });/*
     mc.on("pan", function(ev) {
       //prevent default action
