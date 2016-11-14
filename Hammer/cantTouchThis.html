@@ -127,8 +127,8 @@
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px',
-        'left' : pinchPosition.left + previousScale/2 + 'px',
-        'top' : pinchPosition.top + previousScale/2 + 'px'
+        'left' : pinchPosition.left + previousScale/4 + 'px',
+        'top' : pinchPosition.top + previousScale/4 + 'px'
       });
       previousScale = parseFloat($('#myElement').css('width'));
     });/*
