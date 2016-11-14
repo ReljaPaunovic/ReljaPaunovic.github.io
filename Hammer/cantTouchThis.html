@@ -106,8 +106,6 @@
     mc.on("pan", function(ev) {
       //prevent default action
       event.gesture.preventDefault();
-      var bla = document.getElementById('bla');
-      bla.textContent = deltaPosition.left;
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
@@ -128,8 +126,6 @@
       }
     });
     mc.on("panend", function() {
-      var bla = document.getElementById('bla');
-      bla.textContent = "lala";
       cumulativeDeltaPosition.left += deltaPosition.left;
       cumulativeDeltaPosition.top += deltaPosition.top;
     });
@@ -142,6 +138,5 @@
       });
     });
   </script>
-  <p id="bla"> ASD</p>
 </body>
 </html>
