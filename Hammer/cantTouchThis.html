@@ -109,10 +109,19 @@
     // Draw map
     drawMap();
     // listen to events...
+    var scale = 1;
     mc.on("pinch", function(ev){
       //alert("Pinchin recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
+      });
+      scale = scale * ev.scale;
+    });
+    mc.on("pinchend", function(ev){
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
+      $("#myElement").css({
+        'height': scale * height , 'width' : scale * width
       });
     });
     mc.on("pan", function(ev) {
