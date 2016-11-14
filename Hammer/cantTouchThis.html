@@ -116,11 +116,17 @@
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
-      scale += ev.scale;
-      i = i + 1;
+      scale *= ev.scale;
     });
     mc.on("pinchend", function(ev){
-      
+
+    });
+    mc.on("pinchstart", function(ev){
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
+      $("#myElement").css({
+        'height': height * scale, 'width' : width * scale
+      });
     });
     mc.on("pan", function(ev) {
       //prevent default action
