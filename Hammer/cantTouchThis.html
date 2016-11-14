@@ -110,9 +110,9 @@
     drawMap();
     // listen to events...
     mc.on("pinchin", function(ev){
-      alert("Pinchin recognized" + ev.deltaX + " : " + ev.deltaY);
+      alert("Pinchin recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
-        'transform': 'scale('+ev.deltaX+','+ev.deltaY+')'
+        'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
     });
     /*mc.on("pinchout", function(ev){
