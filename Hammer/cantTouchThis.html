@@ -112,7 +112,7 @@
     var scale = 1;
     var i = 0;
     mc.on("pinch", function(ev){
-      //alert("Pinchin recognized" + ev.scale + " : " + ev.scale);
+      alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
@@ -161,12 +161,12 @@
     mc.on("panstart", function() {
       console.log(cumulativeDeltaPosition.left);
       console.log(cumulativeDeltaPosition.top);
-      var width = parseFloat($('#myElement').css('width'));
-      var height = parseFloat($('#myElement').css('height'));
+      //var width = parseFloat($('#myElement').css('width'));
+      //var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'left': cumulativeDeltaPosition.left + 'px',
         'top' : cumulativeDeltaPosition.top + 'px',
-        'height' : height * scale, 'width': width * scale
+        //'height' : height * scale, 'width': width * scale
       });
     });
   </script>
