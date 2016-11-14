@@ -110,21 +110,24 @@
     drawMap();
     // listen to events...
     var scaleInPixels = parseFloat($('#myElement').css('width'));
-    var scaleInPixelsPrevious = parseFloat($('#myElement').css('width'));
+    var pinchPosition = {'left' : initialPosition.left, 'top' : initialPosition.top };
     mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
       scaleInPixels = parseFloat($('#myElement').css('width'));
+      pinchPosition.left = parseFloat($('#myElement').css('left'));
+      pinchPosition.top = parseFloat($('#myElement').css('top'));
+
     });
     mc.on("pinchstart", function(ev){
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
-        'height': scaleInPixels + scaleInPixels/scaleInPixelsPrevious + 'px', 'width' : scaleInPixels + 'px'
+        'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px',
+        'left' : pinchPosition.left + 'px', 'top' : pinchPosition.top + 'px'
       });
-      scaleInPixelsPrevious = parseFloat($('#myElement').css('width'));
     });/*
     mc.on("pan", function(ev) {
       //prevent default action
