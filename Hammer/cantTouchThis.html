@@ -122,8 +122,12 @@
     mc.on("pinchend", function(ev){
 
     });
+    var k = 0;
     mc.on("pinchstart", function(ev){
-      alert(i);
+      if (k != 0){
+        alert(i);
+        k = 1;
+      }
       scale = scale / i;
       i = 0;
       var width = parseFloat($('#myElement').css('width'));
