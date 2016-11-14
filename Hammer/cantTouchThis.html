@@ -136,12 +136,12 @@
         'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
 
       });
-      //previousScale = parseFloat($('#myElement').css('width'));
-    });/*
+      previousScale = parseFloat($('#myElement').css('width'));
+    });
     mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
-      alert("Pan detected");
+      //alert("Pan detected");
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
@@ -175,7 +175,7 @@
         'top' : cumulativeDeltaPosition.top + 'px',
         //'height' : height * scale, 'width': width * scale
       });
-    });*/
+    });
   </script>
 </body>
 </html>
