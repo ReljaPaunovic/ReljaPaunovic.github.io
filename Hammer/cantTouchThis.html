@@ -7,9 +7,14 @@
   <link rel="stylesheet" type="text/css" href="myStyle.css">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <title>Hammer.js implementation of a game</title>
+
+
+
 </head>
 
 <body>
+
+
   <canvas width="616" height="556" id="map" >
     Can't load the game, because your browser doesn't support HTML5.
   </canvas>
@@ -96,8 +101,7 @@
       swipe: false,
       tap: false,
       touch: false,
-      transform: false,
-      preventDefault: true
+      transform: false
     });
     mc.get('pinch').set({
       enable: true
