@@ -109,7 +109,7 @@
     // Draw map
     drawMap();
     // listen to events...
-    var scale = 1;
+    var scale = parseFloat($('#myElement').css('width'));
     var i = 0;
     mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
