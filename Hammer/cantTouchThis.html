@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="http://hammerjs.github.io/dist/hammer.min.js"></script>
+  <script src="http://hammerjs.github.io/dist/hammer-time.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="myStyle.css">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+  <canvas width="616" height="556" id="map" >
+    Can't load the game, because your browser doesn't support HTML5.
+  </canvas>
+  <div id="myElement" draggable="true"></div>
+  <script>
+    document.getElementById("map").setAttribute("width", window.innerWidth);
+    document.getElementById("map").setAttribute("height", window.innerHeight);
+    var canvas = document.getElementById("map");
+    var context = canvas.getContext("2d");
+    var mapWidth = canvas.width;
+    var mapHeight = canvas.height;
+    // Initialize position of myElement
+    var initialPosition = {'left' : 100, 'top' : 100};
+    $("#myElement").css({
+      'left' : initialPosition.left + 'px', 'top' : initialPosition.top + 'px'
+    });
+    // Supporting variables
+    var deltaPosition = {'left' : 0, 'top' : 0};
+    var cumulativeDeltaPosition = {'left' : initialPosition.left, 'top' : initialPosition.top};
+    function drawMap(){
+      // Just in case we decide to add stuff, we are making sure
+      // that background is white
+      makeWhite(0, 0, canvas.width, canvas.height);
+      var mapImg = new Image();
+      mapImg.onload = function() {
+        context.drawImage(mapImg, 0, 0, window.innerWidth, window.innerHeight);
+        context.beginPath();
+          //TODO Little circle that should be used as end
+          context.arc(window.innerWidth * 0.75, window.innerHeight * 0.8, 7, 0, 2 * Math.PI, false);
+        context.closePath();
+        context.fillStyle = '#00FF00';
+        context.fill();
+      }
+      mapImg.src = "map.gif";
+    }
+    function makeWhite(x, y, w, h) {
+        context.beginPath();
+        context.rect(x, y, w, h);
+        context.closePath();
+        context.fillStyle = "white";
+        context.fill();
+    }
+
+    function checkIfIlegal(deltax, deltay){
+      // width is in pixels (px), example 30px, but parseFloat ignores px
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
+      var absoluteX = cumulativeDeltaPosition.left + deltax - width/4;
+      var absoluteY = cumulativeDeltaPosition.top + deltay - height/4;
+
+      var imgData = context.getImageData(absoluteX, absoluteY, width, height);
+      var data = imgData.data;
+      var canMove = 1;
+      if (absoluteX >= 0 && absoluteX <= mapWidth - width && absoluteY >= 0 && absoluteY <= mapHeight - height) {
+
+        for (var i = 0; i < 4 * width * height; i += 4) { // look at all pixels
+            if (data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 0) { // black
+                canMove = 0; // 0 means: the rectangle can't move
+                break;
+
+            }
+            else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 0) { // lime: #00FF00
+                canMove = 2; // 2 means: the end point is reached
+                break;
+            }
+        }
+      }
+      else{
+        canMove = 0;
+      }
+      return canMove;
+    }
+    var myElement = document.getElementById('myElement');
+
+    // create a simple instance
+    // by default, it only adds horizontal recognizers
+    var mc = new Hammer(myElement,{
+      drag: true,
+      drag_block_horizontal: true,
+      drag_min_distance: 3,
+      hold: false,
+      release: true,
+      swipe: false,
+      tap: false,
+      touch: false,
+      transform: false
+    });
+
+
+
+    // Draw map
+    drawMap();
+    // listen to events...
+
+    mc.on("pan", function(ev) {
+      //prevent default action
+      event.gesture.preventDefault();
+      var bla = document.getElementById('bla');
+      bla.textContent = deltaPosition.left;
+      switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
+        case 0: // Wall touched
+          alert("GAME END - YOU LOSE!");
+          mc.remove("pan");
+          break;
+        case 1: // All fine
+          //bla.textContent = ev.center.x;
+          $("#myElement").css({
+            'transform': 'translate(' + ev.deltaX + 'px,' + ev.deltaY + 'px)'
+          });
+          deltaPosition.left = ev.deltaX;
+          deltaPosition.top = ev.deltaY;
+          break;
+        case 2: // End reached
+          alert("GAME END - YOU WIN!");
+          mc.remove("pan");
+          break;
+      }
+    });
+    mc.on("panend", function() {
+      var bla = document.getElementById('bla');
+      bla.textContent = "lala";
+      cumulativeDeltaPosition.left += deltaPosition.left;
+      cumulativeDeltaPosition.top += deltaPosition.top;
+    });
+    mc.on("panstart", function() {
+      console.log(cumulativeDeltaPosition.left);
+      console.log(cumulativeDeltaPosition.top);
+      $("#myElement").css({
+        'left': cumulativeDeltaPosition.left + 'px',
+        'top' : cumulativeDeltaPosition.top + 'px'
+      });
+    });
+  </script>
+  <p id="bla"> ASD</p>
+</body>
+</html>
