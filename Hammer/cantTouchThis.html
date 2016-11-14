@@ -109,7 +109,7 @@
     // Draw map
     drawMap();
     // listen to events...
-    mc.on("pinchin", function(ev){
+    mc.on("pinch", function(ev){
       //alert("Pinchin recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
