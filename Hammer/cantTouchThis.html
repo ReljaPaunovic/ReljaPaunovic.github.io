@@ -124,7 +124,7 @@
 
     });
     mc.on("pinchend", function(ev){
-      stemp = scaleInPixels;
+      stemp += scaleInPixels;
 
     });
     mc.on("pinchstart", function(ev){
@@ -133,7 +133,7 @@
       $("#myElement").css({
         'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px',
         'left' : pinchPosition.left + (previousScale - stemp) / 2 + 'px',
-        'top' : pinchPosition.top +  (previousScale - stemp) / 2 + 'px'
+        'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
 
       });
       previousScale = parseFloat($('#myElement').css('width'));
