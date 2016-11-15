@@ -62,8 +62,8 @@
       // width is in pixels (px), example 30px, but parseFloat ignores px
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
-      var absoluteX = cumulativeDeltaPosition.left + deltax - width/4;
-      var absoluteY = cumulativeDeltaPosition.top + deltay - height/4;
+      var absoluteX = cumulativeDeltaPosition.left + deltax;// - width/4;
+      var absoluteY = cumulativeDeltaPosition.top + deltay;// - height/4;
 
       var imgData = context.getImageData(absoluteX, absoluteY, width, height);
       var data = imgData.data;
