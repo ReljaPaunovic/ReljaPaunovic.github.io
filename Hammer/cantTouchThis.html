@@ -132,9 +132,9 @@
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
-        'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px',
-        'left' : pinchPosition.left + (previousScale - stemp) / 2 + 'px',
-        'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
+        'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px'
+        //'left' : pinchPosition.left + (previousScale - stemp) / 2 + 'px',
+        //'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
 
       });
       previousScale = parseFloat($('#myElement').css('width'));
