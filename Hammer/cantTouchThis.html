@@ -138,7 +138,7 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));
-    });/*
+    });
     mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
@@ -176,7 +176,13 @@
         'top' : cumulativeDeltaPosition.top + 'px',
         //'height' : height * scale, 'width': width * scale
       });
-    });*/
+      $("#myElement").css({
+        'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px'
+        //'left' : pinchPosition.left + (previousScale - stemp) / 2 + 'px',
+        //'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
+
+      });
+    });
   </script>
 </body>
 </html>
