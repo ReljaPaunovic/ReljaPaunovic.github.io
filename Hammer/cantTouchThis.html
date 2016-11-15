@@ -118,12 +118,13 @@
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
+
+    });
+    mc.on("pinchend", function(ev){
       scaleInPixels = parseFloat($('#myElement').css('width'));
       pinchPosition.left = parseFloat($('#myElement').css('left'));
       pinchPosition.top = parseFloat($('#myElement').css('top'));
 
-    });
-    mc.on("pinchend", function(ev){
       stemp = scaleInPixels;
 
     });
@@ -137,7 +138,7 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));
-    });
+    });/*
     mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
@@ -175,7 +176,7 @@
         'top' : cumulativeDeltaPosition.top + 'px',
         //'height' : height * scale, 'width': width * scale
       });
-    });
+    });*/
   </script>
 </body>
 </html>
