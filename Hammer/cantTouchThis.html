@@ -45,7 +45,7 @@
           //TODO Little circle that should be used as end
           context.arc(window.innerWidth * 0.75, window.innerHeight * 0.8, 7, 0, 2 * Math.PI, false);
         context.closePath();
-        context.fillStyle = '#00FF00';
+        context.fillStyle = '#00FFFF';
         context.fill();
       }
       mapImg.src = "map.gif";
@@ -76,7 +76,7 @@
                 break;
 
             }
-            else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 0) { // lime: #00FF00
+            else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 255) { // #00FFFF
                 canMove = 2; // 2 means: the end point is reached
                 break;
             }
