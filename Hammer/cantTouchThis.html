@@ -21,6 +21,7 @@
     var context = canvas.getContext("2d");
     var mapWidth = canvas.width;
     var mapHeight = canvas.height;
+    var PixelScore = 0;
     // Initialize position of myElement
     var initialPosition = {'left' : 80, 'top' : 100};
     $("#myElement").css({
@@ -92,6 +93,7 @@
                 break;
             }
             else if(data[i] === 255 && data[i + 1] === 255 && data[i + 2] === 255){
+              PixelScore++;
               data[i] = 244;
               data[i+1] = 146;
               data[i+2] = 66;
@@ -113,7 +115,7 @@
       mc.remove("pinch");
     }
     function youLose(){
-      alert("GAME END - YOU LOSE!");
+      alert("GAME END - YOU LOSE!" + PixelScore);
       mc.remove("pan");
       mc.remove("pinch");
     }
