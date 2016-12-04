@@ -52,6 +52,22 @@
         context.fillStyle = "white";
         context.fill();
     }
+    function putImageData(ctx, imageData, dx, dy, width, height) {
+      var data = imageData;
+      var height = height;
+      var width = width;
+      for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
+          var pos = y * width + x;
+          ctx.fillStyle = 'rgba(' + data[pos*4+0]
+                            + ',' + data[pos*4+1]
+                            + ',' + data[pos*4+2]
+                            + ',' + (data[pos*4+3]/255) + ')';
+          ctx.fillRect(x + dx, y + dy, 1, 1);
+        }
+      }
+    }
+
     function checkIfIlegal(deltax, deltay){
       // width is in pixels (px), example 30px, but parseFloat ignores px
       var width = parseFloat($('#myElement').css('width'));
@@ -74,11 +90,15 @@
                 canMove = 2; // 2 means: the end point is reached
                 break;
             }
+            data[i] = 244;
+            data[i+1] = 146;
+            data[i+2] = 66;
         }
       }
       else{
         canMove = 0;
       }
+      putImageData(context, data, absoluteX, absoluteY, width, height);
       return canMove;
     }
     function youWin(){
