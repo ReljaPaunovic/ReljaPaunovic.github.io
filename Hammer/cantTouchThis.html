@@ -56,6 +56,7 @@
     }
     function checkIfIlegal(deltax, deltay){
       // width is in pixels (px), example 30px, but parseFloat ignores px
+      return 1;
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       var absoluteX = cumulativeDeltaPosition.left + deltax;
@@ -162,7 +163,7 @@
       $("#debug").html(parseFloat($('#myElement').css('width')));
 
     });
-    /*mc.on("pan", function(ev) {
+    mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
       //alert("Pan detected");
@@ -199,13 +200,7 @@
         'top' : cumulativeDeltaPosition.top + 'px',
         //'height' : height * scale, 'width': width * scale
       });
-      $("#myElement").css({
-        'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px'
-        //'left' : pinchPosition.left + (previousScale - stemp) / 2 + 'px',
-        //'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
-
-      });
-    });*/
+    });
   </script>
 </body>
 </html>
