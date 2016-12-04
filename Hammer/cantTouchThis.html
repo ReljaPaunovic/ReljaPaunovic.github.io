@@ -167,7 +167,7 @@
       //prevent default action
       //event.gesture.preventDefault();
       //alert("Pan detected");
-      $("#debug").html("pan detected");
+      $("#debug").html("pan detected!!!");
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
@@ -175,8 +175,13 @@
           break;
         case 1: // All fine
           //bla.textContent = ev.center.x;
-          $("#myElement").css({
+          /*$("#myElement").css({
             'transform': 'translate(' + ev.deltaX + 'px,' + ev.deltaY + 'px)'
+          });*/
+          $("#myElement").css({
+            'left': (cumulativeDeltaPosition.left + ev.deltaX) + 'px',
+            'top' : (cumulativeDeltaPosition.top + ev.deltaY) + 'px'
+            //'height' : height * scale, 'width': width * scale
           });
           deltaPosition.left = ev.deltaX;
           deltaPosition.top = ev.deltaY;
