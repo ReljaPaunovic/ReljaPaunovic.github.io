@@ -11,7 +11,7 @@
 
 <body>
 
-
+  <p id="debug"> ... <p>
   <canvas width="616" height="556" id="map" >
     Can't load the game, because your browser doesn't support HTML5.
   </canvas>
@@ -116,6 +116,7 @@
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
       scale = ev.scale;
+      $("#debug").html(scale);
     });
     mc.on("pinchend", function(ev){
       /*scaleInPixels = parseFloat($('#myElement').css('width'));
@@ -123,6 +124,7 @@
       pinchPosition.top = parseFloat($('#myElement').css('top'));
 
       stemp = scaleInPixels;*/
+      /*
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       if(scale > 1){
@@ -132,7 +134,7 @@
       if(scale < 1){
         cumulativeDeltaPosition.left += scale * width;
         cumulativeDeltaPosition.top += scale * height;
-      }
+      }*/
     });
     mc.on("pinchstart", function(ev){
       /*var width = parseFloat($('#myElement').css('width'));
