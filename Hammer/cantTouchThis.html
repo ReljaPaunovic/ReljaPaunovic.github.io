@@ -11,7 +11,7 @@
 
 <body>
 
-  <p id="debug"> ... <p>
+  <p id="debug"> .. <p>
   <canvas width="616" height="556" id="map" >
     Can't load the game, because your browser doesn't support HTML5.
   </canvas>
@@ -151,7 +151,7 @@
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
-        'height': height, 'width': width
+        'height': height * scale, 'width': width * scale
       });
       $("#debug").html(parseFloat($('#myElement').css('width')));
       $("#myElement").css({
