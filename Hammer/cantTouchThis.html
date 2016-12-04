@@ -117,14 +117,19 @@
       });
       scale = ev.scale;
     });
-    /*mc.on("pinchend", function(ev){
-      scaleInPixels = parseFloat($('#myElement').css('width'));
+    mc.on("pinchend", function(ev){
+      /*scaleInPixels = parseFloat($('#myElement').css('width'));
       pinchPosition.left = parseFloat($('#myElement').css('left'));
       pinchPosition.top = parseFloat($('#myElement').css('top'));
 
-      stemp = scaleInPixels;
+      stemp = scaleInPixels;*/
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
+      $("#myElement").css({
+        'height': height * scale, 'width': width * scale
+      });
 
-    });*/
+    });
     mc.on("pinchstart", function(ev){
       /*var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
@@ -135,10 +140,11 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));*/
-      var width = parseFloat($('#myElement').css('width'));
-      var height = parseFloat($('#myElement').css('height'));
+
       $("#myElement").css({
-        'height': height * scale, 'width': width * scale 
+        'left': cumulativeDeltaPosition.left + 'px',
+        'top' : cumulativeDeltaPosition.top + 'px',
+        //'height' : height * scale, 'width': width * scale
       });
     });
     /*mc.on("pan", function(ev) {
