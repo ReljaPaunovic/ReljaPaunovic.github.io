@@ -22,6 +22,7 @@
     var mapWidth = canvas.width;
     var mapHeight = canvas.height;
     var PixelScore = 0;
+    var timeLeft;
     // Initialize position of myElement
     var initialPosition = {'left' : 80, 'top' : 100};
     $("#myElement").css({
@@ -56,6 +57,7 @@
                 secondsToShow = "0" + secondsToShow; // if the number of seconds is '5' for example, make sure that it is shown as '05'
             }
             context.fillText(minutes.toString() + ":" + secondsToShow, canvas.width - 40, canvas.height / 8);
+            timeLeft = seconds;
             seconds--;
         }, 1000);
     }
@@ -79,7 +81,7 @@
         context.beginPath();
         context.rect(x, y, w, h);
         context.closePath();
-        context.fillStyle = "blue";
+        context.fillStyle = "white";
         context.fill();
     }
     function putImageData(ctx, imageData, dx, dy, width, height) {
@@ -139,12 +141,12 @@
       return canMove;
     }
     function youWin(){
-      alert("GAME END - YOU WIN!");
+      alert("GAME END - YOU WIN! Your score was:" +  (PixelScore * timeLeft) / 1000);
       mc.remove("pan");
       mc.remove("pinch");
     }
     function youLose(){
-      alert("GAME END - YOU LOSE!" + PixelScore);
+      alert("GAME END - YOU LOSE!");
       mc.remove("pan");
       mc.remove("pinch");
     }
