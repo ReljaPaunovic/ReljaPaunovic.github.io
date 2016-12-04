@@ -125,10 +125,14 @@
       stemp = scaleInPixels;*/
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
-      $("#myElement").css({
-        'height': height * scale, 'width': width * scale
-      });
-
+      if(scale > 1){
+        cumulativeDeltaPosition.left -= (scale - 1) * width;
+        cumulativeDeltaPosition.top -= (scale - 1) * height; //or width, doesnt matter
+      }
+      if(scale < 1){
+        cumulativeDeltaPosition.left += scale * width;
+        cumulativeDeltaPosition.top += scale * height;
+      }
     });
     mc.on("pinchstart", function(ev){
       /*var width = parseFloat($('#myElement').css('width'));
@@ -140,7 +144,11 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));*/
-
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
+      $("#myElement").css({
+        'height': height * scale, 'width': width * scale
+      });
       $("#myElement").css({
         'left': cumulativeDeltaPosition.left + 'px',
         'top' : cumulativeDeltaPosition.top + 'px',
