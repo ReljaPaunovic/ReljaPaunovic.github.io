@@ -118,6 +118,9 @@
       $("#myElement").css({
         'height': elementWidth * ev.scale, 'width': elementWidth * ev.scale
       });
+      if(checkIfIlegal(0,0) == 1){
+        alert("I AM SOOOO SORRY");
+      }
       scale = ev.scale;
       //$("#debug").html(scale);
     });
