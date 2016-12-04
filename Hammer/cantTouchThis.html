@@ -32,7 +32,7 @@
     var cumulativeDeltaPosition = {'left' : initialPosition.left, 'top' : initialPosition.top};
     function createTimer(seconds) {
         intervalVar = setInterval(function () {
-            makeWhite(canvas.width * 3/4 - 30, 0, 150, 150);
+            makeWhite(canvas.width - 80, 0, 150, 150);
             if (seconds === 0) {
                 clearInterval(intervalVar);
                 youLose();
@@ -55,7 +55,7 @@
             if (secondsToShow.length === 1) {
                 secondsToShow = "0" + secondsToShow; // if the number of seconds is '5' for example, make sure that it is shown as '05'
             }
-            context.fillText(minutes.toString() + ":" + secondsToShow, canvas.width * 3/4, canvas.height / 8);
+            context.fillText(minutes.toString() + ":" + secondsToShow, canvas.width - 40, canvas.height / 8);
             seconds--;
         }, 1000);
     }
@@ -79,7 +79,7 @@
         context.beginPath();
         context.rect(x, y, w, h);
         context.closePath();
-        context.fillStyle = "white";
+        context.fillStyle = "blue";
         context.fill();
     }
     function putImageData(ctx, imageData, dx, dy, width, height) {
