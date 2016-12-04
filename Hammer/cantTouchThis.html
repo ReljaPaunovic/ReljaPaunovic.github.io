@@ -78,6 +78,7 @@
       var imgData = context.getImageData(absoluteX, absoluteY, width, height);
       var data = imgData.data;
       var canMove = 1;
+      var dataChanged = false;
       if (absoluteX >= 0 && absoluteX <= mapWidth - width && absoluteY >= 0 && absoluteY <= mapHeight - height) {
 
         for (var i = 0; i < 4 * width * height; i += 4) { // look at all pixels
@@ -90,15 +91,20 @@
                 canMove = 2; // 2 means: the end point is reached
                 break;
             }
-            data[i] = 244;
-            data[i+1] = 146;
-            data[i+2] = 66;
+            else if(data[i] === 255 && data[i + 1] === 255 && data[i + 2] === 255){
+              data[i] = 244;
+              data[i+1] = 146;
+              data[i+2] = 66;
+              dataChanged = true;
+            }
         }
       }
       else{
         canMove = 0;
       }
-      putImageData(context, data, absoluteX, absoluteY, width, height);
+      if(dataChanged){
+        putImageData(context, data, absoluteX, absoluteY, width, height);
+      }
       return canMove;
     }
     function youWin(){
