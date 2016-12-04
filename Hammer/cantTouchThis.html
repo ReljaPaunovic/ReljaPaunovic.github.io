@@ -81,6 +81,16 @@
       }
       return canMove;
     }
+    function youWin(){
+      alert("GAME END - YOU WIN!");
+      mc.remove("pan");
+      mc.remove("pinch");
+    }
+    function youLose(){
+      alert("GAME END - YOU LOSE!");
+      mc.remove("pan");
+      mc.remove("pinch");
+    }
     var myElement = document.getElementById('myElement');
 
     // create a simple instance
@@ -118,8 +128,13 @@
       $("#myElement").css({
         'height': elementWidth * ev.scale, 'width': elementWidth * ev.scale
       });
-      if(checkIfIlegal(0,0) == 0){
-        alert("I AM SOOOO SORRY");
+      switch(checkIfIlegal(0,0)){
+        case 0:
+          youLose();
+          break;
+        case 2:
+          youWin();
+          break;
       }
       scale = ev.scale;
       //$("#debug").html(scale);
@@ -170,9 +185,7 @@
       //$("#debug").html("pan detected!");
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
-          alert("GAME END - YOU LOSE!");
-          mc.remove("pan");
-          mc.remove("pinch");
+          youLose();
           break;
         case 1: // All fine
           //bla.textContent = ev.center.x;
@@ -188,9 +201,7 @@
           deltaPosition.top = ev.deltaY;
           break;
         case 2: // End reached
-          alert("GAME END - YOU WIN!");
-          mc.remove("pan");
-          mc.remove("pinch");
+          youWin();
           break;
       }
     });
