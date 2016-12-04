@@ -113,8 +113,12 @@
 
     mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
-      $("#myElement").css({
+      /*$("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
+      });*/
+      var width = parseFloat($('#myElement').css('width'));
+      $("#myElement").css({
+        'height': width * ev.scale, 'width': width * ev.scale
       });
       scale = ev.scale;
       //$("#debug").html(scale);
