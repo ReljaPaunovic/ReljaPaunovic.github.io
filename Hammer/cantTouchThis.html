@@ -111,15 +111,13 @@
     var previousScale = 0;
     var pinchPosition = {'left' : initialPosition.left, 'top' : initialPosition.top };
 
-    var myElementWidth = parseFloat($('#myElement').css('width'));
-    var myElementHeight = parseFloat($('#myElement').css('width'));
     mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });
       scale = ev.scale;
-      $("#debug").html(scale);
+      //$("#debug").html(scale);
     });
     mc.on("pinchend", function(ev){
       /*scaleInPixels = parseFloat($('#myElement').css('width'));
@@ -127,13 +125,15 @@
       pinchPosition.top = parseFloat($('#myElement').css('top'));
 
       stemp = scaleInPixels;*/
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
       if(scale > 1){
-        cumulativeDeltaPosition.left -= (scale - 1) * myElementWidth;
-        cumulativeDeltaPosition.top -= (scale - 1) * myElementHeight; //or width, doesnt matter
+        cumulativeDeltaPosition.left -= (scale - 1) * width;
+        cumulativeDeltaPosition.top -= (scale - 1) * height; //or width, doesnt matter
       }
       if(scale < 1){
-        cumulativeDeltaPosition.left += scale * myElementWidth;
-        cumulativeDeltaPosition.top += scale * myElementHeight;
+        cumulativeDeltaPosition.left += scale * width;
+        cumulativeDeltaPosition.top += scale * height;
       }
       $("#debug").html(parseFloat($('#myElement').css('width')));
     });
@@ -147,10 +147,11 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));*/
-      myElementWidth *= scale;
-      myElementHeight *= scale;
+      $("#debug").html(parseFloat($('#myElement').css('width')));
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
-        'height': myElementHeight, 'width': myElementWidth
+        'height': height * scale, 'width': width * scale
       });
       $("#myElement").css({
         'left': cumulativeDeltaPosition.left + 'px',
