@@ -135,6 +135,7 @@
         cumulativeDeltaPosition.left += scale * myElementWidth;
         cumulativeDeltaPosition.top += scale * myElementHeight;
       }
+      $("#debug").html(parseFloat($('#myElement').css('width')));
     });
     mc.on("pinchstart", function(ev){
       /*var width = parseFloat($('#myElement').css('width'));
@@ -149,7 +150,7 @@
       myElementWidth *= scale;
       myElementHeight *= scale;
       $("#myElement").css({
-        'height': myElementWidth, 'width': myElementHeight
+        'height': myElementHeight, 'width': myElementWidth
       });
       $("#myElement").css({
         'left': cumulativeDeltaPosition.left + 'px',
