@@ -124,9 +124,9 @@
 
       stemp = scaleInPixels;
 
-    });
+    });*/
     mc.on("pinchstart", function(ev){
-      var width = parseFloat($('#myElement').css('width'));
+      /*var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': scaleInPixels + 'px', 'width' : scaleInPixels + 'px'
@@ -134,8 +134,11 @@
         //'top' : pinchPosition.top + (previousScale - stemp) / 2 + 'px'
 
       });
-      previousScale = parseFloat($('#myElement').css('width'));
-    });*/
+      previousScale = parseFloat($('#myElement').css('width'));*/
+      $("#myElement").css({
+        'transform': 'scale('+scale+','+scale+')'
+      });
+    });
     /*mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
