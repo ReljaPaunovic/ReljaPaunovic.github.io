@@ -10,8 +10,6 @@
 </head>
 
 <body>
-
-  <p id="debug"> .. <p>
   <canvas width="616" height="556" id="map" >
     Can't load the game, because your browser doesn't support HTML5.
   </canvas>
@@ -125,7 +123,6 @@
       //$("#debug").html(scale);
     });
     mc.on("pinchend", function(ev){
-      mc.add("pan");
       /*scaleInPixels = parseFloat($('#myElement').css('width'));
       pinchPosition.left = parseFloat($('#myElement').css('left'));
       pinchPosition.top = parseFloat($('#myElement').css('top'));
@@ -142,10 +139,9 @@
         cumulativeDeltaPosition.top += scale * height;
       }*/
       elementWidth = parseFloat($('#myElement').css('width'));
-      $("#debug").html(parseFloat($('#myElement').css('width')));
+      //$("#debug").html(parseFloat($('#myElement').css('width')));
     });
     mc.on("pinchstart", function(ev){
-      mc.remove("pan");
       /*var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
@@ -162,14 +158,14 @@
         'height': height * scale, 'width': width * scale
       });*/
 
-      $("#debug").html(parseFloat($('#myElement').css('width')));
+      //$("#debug").html(parseFloat($('#myElement').css('width')));
 
     });
     mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
       //alert("Pan detected");
-      $("#debug").html("pan detected!");
+      //$("#debug").html("pan detected!");
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
