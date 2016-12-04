@@ -7,9 +7,6 @@
   <link rel="stylesheet" type="text/css" href="myStyle.css">
   <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <title>Hammer.js implementation of a game</title>
-
-
-
 </head>
 
 <body>
@@ -57,13 +54,13 @@
         context.fillStyle = "white";
         context.fill();
     }
-
+    // TODO: THERE IS SOMETHING WRONG THERE
     function checkIfIlegal(deltax, deltay){
       // width is in pixels (px), example 30px, but parseFloat ignores px
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
-      var absoluteX = cumulativeDeltaPosition.left + deltax - width/4;
-      var absoluteY = cumulativeDeltaPosition.top + deltay - height/4;
+      var absoluteX = cumulativeDeltaPosition.left + deltax;
+      var absoluteY = cumulativeDeltaPosition.top + deltay;
 
       var imgData = context.getImageData(absoluteX, absoluteY, width, height);
       var data = imgData.data;
@@ -113,7 +110,7 @@
     var stemp = 0;
     var previousScale = 0;
     var pinchPosition = {'left' : initialPosition.left, 'top' : initialPosition.top };
-    mc.on("pinch", function(ev){
+    /*mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       $("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
@@ -138,7 +135,7 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));
-    });
+    });*/
     mc.on("pan", function(ev) {
       //prevent default action
       //event.gesture.preventDefault();
