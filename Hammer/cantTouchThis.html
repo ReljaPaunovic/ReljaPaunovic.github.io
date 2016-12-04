@@ -54,7 +54,6 @@
     }
     function checkIfIlegal(deltax, deltay){
       // width is in pixels (px), example 30px, but parseFloat ignores px
-      return 1;
       var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       var absoluteX = cumulativeDeltaPosition.left + deltax;
@@ -170,6 +169,7 @@
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
           mc.remove("pan");
+          mc.remove("pinch");
           break;
         case 1: // All fine
           //bla.textContent = ev.center.x;
@@ -187,6 +187,7 @@
         case 2: // End reached
           alert("GAME END - YOU WIN!");
           mc.remove("pan");
+          mc.remove("pinch");
           break;
       }
     });
