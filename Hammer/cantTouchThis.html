@@ -125,7 +125,7 @@
       pinchPosition.top = parseFloat($('#myElement').css('top'));
 
       stemp = scaleInPixels;*/
-      var width = parseFloat($('#myElement').css('width'));
+    /*  var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       if(scale > 1){
         cumulativeDeltaPosition.left -= (scale - 1) * width;
@@ -134,7 +134,7 @@
       if(scale < 1){
         cumulativeDeltaPosition.left += scale * width;
         cumulativeDeltaPosition.top += scale * height;
-      }
+      }*/
       $("#debug").html(parseFloat($('#myElement').css('width')));
     });
     mc.on("pinchstart", function(ev){
@@ -148,7 +148,7 @@
       });
       previousScale = parseFloat($('#myElement').css('width'));*/
       $("#debug").html(parseFloat($('#myElement').css('width')));
-      var width = parseFloat($('#myElement').css('width'));
+      /*var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
         'height': height * scale, 'width': width * scale
@@ -157,7 +157,7 @@
         'left': cumulativeDeltaPosition.left + 'px',
         'top' : cumulativeDeltaPosition.top + 'px',
         //'height' : height * scale, 'width': width * scale
-      });
+      });*/
     });
     /*mc.on("pan", function(ev) {
       //prevent default action
