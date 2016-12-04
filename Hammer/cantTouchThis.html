@@ -111,14 +111,14 @@
     var previousScale = 0;
     var pinchPosition = {'left' : initialPosition.left, 'top' : initialPosition.top };
 
+    var elementWidth = parseFloat($('#myElement').css('width'));
     mc.on("pinch", function(ev){
       //alert("Pinch recognized" + ev.scale + " : " + ev.scale);
       /*$("#myElement").css({
         'transform': 'scale('+ev.scale+','+ev.scale+')'
       });*/
-      var width = parseFloat($('#myElement').css('width'));
       $("#myElement").css({
-        'height': width * ev.scale, 'width': width * ev.scale
+        'height': elementWidth * ev.scale, 'width': elementWidth * ev.scale
       });
       scale = ev.scale;
       //$("#debug").html(scale);
@@ -157,6 +157,7 @@
       $("#myElement").css({
         'height': height * scale, 'width': width * scale
       });*/
+      elementWidth = parseFloat($('#myElement').css('width'));
       $("#debug").html(parseFloat($('#myElement').css('width')));
       $("#myElement").css({
         'left': cumulativeDeltaPosition.left + 'px',
