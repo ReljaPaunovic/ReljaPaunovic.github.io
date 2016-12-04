@@ -30,6 +30,35 @@
     // Supporting variables
     var deltaPosition = {'left' : 0, 'top' : 0};
     var cumulativeDeltaPosition = {'left' : initialPosition.left, 'top' : initialPosition.top};
+    function createTimer(seconds) {
+        intervalVar = setInterval(function () {
+            makeWhite(canvas.width * 3/4 - 30, 0, 150, 150);
+            if (seconds === 0) {
+                clearInterval(intervalVar);
+                youLose();
+                return;
+            }
+            context.font = "20px Arial";
+            if (seconds <= 10 && seconds > 5) {
+                context.fillStyle = "orangered";
+            }
+            else if (seconds <= 5) {
+                context.fillStyle = "red";
+            }
+            else {
+                context.fillStyle = "green";
+            }
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+            var minutes = Math.floor(seconds / 60);
+            var secondsToShow = (seconds - minutes * 60).toString();
+            if (secondsToShow.length === 1) {
+                secondsToShow = "0" + secondsToShow; // if the number of seconds is '5' for example, make sure that it is shown as '05'
+            }
+            context.fillText(minutes.toString() + ":" + secondsToShow, canvas.width * 3/4, canvas.height / 8);
+            seconds--;
+        }, 1000);
+    }
     function drawMap(){
       // Just in case we decide to add stuff, we are making sure
       // that background is white
@@ -248,6 +277,7 @@
         //'height' : height * scale, 'width': width * scale
       });
     });
+    createTimer(120);
   </script>
 </body>
 </html>
