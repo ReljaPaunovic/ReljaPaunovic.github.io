@@ -167,6 +167,7 @@
       //prevent default action
       //event.gesture.preventDefault();
       //alert("Pan detected");
+      $("#debug").html("pan detected");
       switch(checkIfIlegal(ev.deltaX, ev.deltaY)){
         case 0: // Wall touched
           alert("GAME END - YOU LOSE!");
