@@ -125,9 +125,7 @@
       //$("#debug").html(scale);
     });
     mc.on("pinchend", function(ev){
-      mc.get('pan').set({
-        enable: true
-      });
+      mc.add("pan");
       /*scaleInPixels = parseFloat($('#myElement').css('width'));
       pinchPosition.left = parseFloat($('#myElement').css('left'));
       pinchPosition.top = parseFloat($('#myElement').css('top'));
@@ -147,9 +145,7 @@
       $("#debug").html(parseFloat($('#myElement').css('width')));
     });
     mc.on("pinchstart", function(ev){
-      mc.get('pan').set({
-        enable: false
-      });
+      mc.remove("pan");
       /*var width = parseFloat($('#myElement').css('width'));
       var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
