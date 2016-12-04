@@ -135,8 +135,10 @@
 
       });
       previousScale = parseFloat($('#myElement').css('width'));*/
+      var width = parseFloat($('#myElement').css('width'));
+      var height = parseFloat($('#myElement').css('height'));
       $("#myElement").css({
-        'transform': 'scale('+scale+','+scale+')'
+        'height': height * scale, 'width': width * scale 
       });
     });
     /*mc.on("pan", function(ev) {
