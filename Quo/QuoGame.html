@@ -121,7 +121,8 @@ p {
       cumulativeDeltaPosition.top += deltaY;
       firstTimeSwipe = true;
     });
-
+    var height = parseFloat($('#myElement').css('height'));
+    var width = parseFloat($('#myElement').css('width'));
 
     $myCanvas.pinching(function(e){
       //str = JSON.stringify(e, null, 4);
