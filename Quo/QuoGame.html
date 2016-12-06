@@ -51,6 +51,67 @@ p {
     var canvas = document.getElementById("mazecanvas");
     var context = canvas.getContext("2d");
     var intervalVar;
+    var PixelScore = 0;
+    var timeLeft = 0;
+
+    var mapWidth = canvas.width;
+    var mapHeight = canvas.height;
+
+    function putImageData(ctx, imageData, dx, dy, width, height) {
+      var data = imageData;
+      var height = height;
+      var width = width;
+      for (var y = 0; y < height; y++) {
+        for (var x = 0; x < width; x++) {
+          var pos = y * width + x;
+          ctx.fillStyle = 'rgba(' + data[pos*4+0]
+                            + ',' + data[pos*4+1]
+                            + ',' + data[pos*4+2]
+                            + ',' + (data[pos*4+3]/255) + ')';
+          ctx.fillRect(x + dx, y + dy, 1, 1);
+        }
+      }
+    }
+    function checkIfIlegal(deltax, deltay){
+        // width is in pixels (px), example 30px, but parseFloat ignores px
+        var width = parseFloat($('#myElement').css('width'));
+        var height = parseFloat($('#myElement').css('height'));
+        var absoluteX = cumulativeDeltaPosition.left + deltax;
+        var absoluteY = cumulativeDeltaPosition.top + deltay;
+
+        var imgData = context.getImageData(absoluteX, absoluteY, width, height);
+        var data = imgData.data;
+        var canMove = 1;
+        var dataChanged = false;
+        if (absoluteX >= 0 && absoluteX <= mapWidth - width && absoluteY >= 0 && absoluteY <= mapHeight - height) {
+
+          for (var i = 0; i < 4 * width * height; i += 4) { // look at all pixels
+              if (data[i] === 0 && data[i + 1] === 0 && data[i + 2] === 0) { // black
+                  canMove = 0; // 0 means: the rectangle can't move
+                  break;
+              }
+              else if (data[i] === 0 && data[i + 1] === 255 && data[i + 2] === 255) { // #00FFFF
+                  canMove = 2; // 2 means: the end point is reached
+                  break;
+              }
+              else if(data[i] === 255 && data[i + 1] === 255 && data[i + 2] === 255){
+                PixelScore++;
+                data[i] = 244;
+                data[i+1] = 146;
+                data[i+2] = 66;
+                dataChanged = true;
+              }
+          }
+        }
+        else{
+          canMove = 0;
+        }
+
+        if(dataChanged){
+          putImageData(context, data, absoluteX, absoluteY, width, height);
+        }
+        return canMove;
+      }
     function drawMaze() {
         makeWhite(0, 0, canvas.width, canvas.height);
         var mazeImg = new Image();
@@ -74,13 +135,22 @@ p {
         context.fillStyle = "white";
         context.fill();
     }
-
+    function youWin(){
+      alert("GAME END - YOU WIN! Your score was:" +  (PixelScore * timeLeft) / 1000);
+      mc.remove("pan");
+      mc.remove("pinch");
+    }
+    function youLose(){
+      alert("GAME END - YOU LOSE!");
+      mc.remove("pan");
+      mc.remove("pinch");
+    }
     var $myCanvas = $$('#mazecanvas');
     var $myElement = $$('#myElement');
     var myElementHeight = $myElement.height();
     var myElementWidth = $myElement.width();
 
-    var initialPosition = {'left' : 10, 'top' : 100};
+    var initialPosition = {'left' : 10, 'top' : 150};
     $('#myElement').css({
       'left' : initialPosition.left + 'px', 'top' : initialPosition.top + 'px'
     });
@@ -89,26 +159,26 @@ p {
     var cumulativeDeltaPosition = {'left' : initialPosition.left, 'top' : initialPosition.top};
     var firstTimeSwipe = true;
     $myCanvas.swiping(function(e){
-        if(firstTimeSwipe){
-          //swipe start
-          //$('#myElement').css({
-          //  'top' : cumulativeDeltaPosition.top + 'px', 'left' : cumulativeDeltaPosition.left + 'px'
-          //});
-          firstTimeSwipe = false;
-        }
-        else{
-          //console.log(e.quoData.delta.x);
-          deltaX = e.currentTouch.x - e.iniTouch.x;// - myElementWidth / 2;
-          deltaY = e.currentTouch.y - e.iniTouch.y;// - myElementHeight / 2;
-          //a.textContent = "x =" + x +" y ="+ y;
-          //$myElement.vendor('transform', 'translate(' + x +'px,'+ y +'px)'); // original one
-          var top = parseFloat($('#myElement').css('top'));
-          var left = parseFloat($('#myElement').css('left'));
-          //a.textContent = "top : " + top + "left : " + left;
+      deltaX = e.currentTouch.x - e.iniTouch.x;// - myElementWidth / 2;
+      deltaY = e.currentTouch.y - e.iniTouch.y;// - myElementHeight / 2;
+      switch(checkIfIlegal(deltaX, deltaY)){
+        case 0:
+          youLose();
+          break;
+        case 1:
+
+              //a.textContent = "x =" + x +" y ="+ y;
+              //$myElement.vendor('transform', 'translate(' + x +'px,'+ y +'px)'); // original one
+              //a.textContent = "top : " + top + "left : " + left;
           $('#myElement').css({
             'top' : cumulativeDeltaPosition.top + deltaY + 'px', 'left' : cumulativeDeltaPosition.left + deltaX + 'px'
           });
-        }
+          break;
+        case 2:
+          youWin();
+          break;
+      }
+
     });
     //Triggers at end of swipe
     $myCanvas.swipe(function(e){
