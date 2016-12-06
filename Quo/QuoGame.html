@@ -73,7 +73,7 @@
     $myElement.swiping(function(e){
       var x = e.currentTouch.x - myElementWidth / 2;
       var y = e.currentTouch.y - myElementHeight / 2;
-      //a.textContent = "x =" + x +" y ="+ y;
+      a.textContent = "x =" + x +" y ="+ y;
       $myElement.vendor('transform', 'translate(' + x +'px,'+ y +'px)'); // original one
     });
 
