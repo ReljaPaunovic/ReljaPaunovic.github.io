@@ -106,7 +106,6 @@ p {
         else{
           canMove = 0;
         }
-
         if(dataChanged){
           putImageData(context, data, absoluteX, absoluteY, width, height);
         }
@@ -137,13 +136,9 @@ p {
     }
     function youWin(){
       alert("GAME END - YOU WIN! Your score was:" +  (PixelScore * timeLeft) / 1000);
-      mc.remove("pan");
-      mc.remove("pinch");
     }
     function youLose(){
       alert("GAME END - YOU LOSE!");
-      mc.remove("pan");
-      mc.remove("pinch");
     }
     var $myCanvas = $$('#mazecanvas');
     var $myElement = $$('#myElement');
@@ -206,7 +201,14 @@ p {
       $('#myElement').css({
         'height' : height * (1 + e.distance/100) + 'px', 'width' : width * (1 + e.distance/100) + 'px'
       });
-
+      switch(checkIfIlegal(0,0)){
+        case 0:
+          youLose();
+          break;
+        case 2:
+          youWin();
+          break;
+      }
 
       //a.textContent = "This summer's gonna hurt like a motherfucker";
 
