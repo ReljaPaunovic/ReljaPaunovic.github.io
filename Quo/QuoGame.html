@@ -98,7 +98,6 @@ p {
           firstTimeSwipe = false;
         }
         else{
-
           //console.log(e.quoData.delta.x);
           deltaX = e.currentTouch.x - e.iniTouch.x;// - myElementWidth / 2;
           deltaY = e.currentTouch.y - e.iniTouch.y;// - myElementHeight / 2;
@@ -122,8 +121,9 @@ p {
 
 
     $myCanvas.pinching(function(e){
-      str = JSON.stringify(e, null, 4);
-      a.textContent = str;
+      //str = JSON.stringify(e, null, 4);
+      //a.textContent = str;
+      a.textContent =" asdasd ";
       //PINCHING MA MAN PINCHING, non of the below worked
       //$myElement.vendor('transform', 'scale('+e.scale+')');
       //$myElement.vendor('transform', 'scale('+e.scale+','+e.scale+')');
