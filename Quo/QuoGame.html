@@ -120,26 +120,20 @@ p {
     });
 
 
-      function getMethods(obj)
-      {
-          var res = [];
-          for(var m in obj) {
-              if(typeof obj[m] == "function") {
-                  res.push(m)
-              }
-          }
-          return res;
-      }
-
-
     $myCanvas.pinching(function(e){
       //PINCHING MA MAN PINCHING, non of the below worked
       //$myElement.vendor('transform', 'scale('+e.scale+')');
       //$myElement.vendor('transform', 'scale('+e.scale+','+e.scale+')');
-      a.textContent = "dist = " + e.distance + " iniTouch = " + e.iniTouch.toString();//getMethods(e).toString();
-      $myElement.css({
-        'transform': 'scale('+e.scale+','+e.scale+')'
+      //a.textContent = "dist = " + e.distance + " iniTouch = " + e.iniTouch.toString();//getMethods(e).toString();
+      //$myElement.css({
+      //  'transform': 'scale('+e.scale+','+e.scale+')'
+      //});
+      var height = parseFloat($('#myElement').css('height'));
+      var width = parseFloat($('#myElement').css('width'));
+      $('#myElement').css({
+        'height' : height * (e.distance/1000) + 'px', 'width' : width + (e.distance/1000) + 'px'
       });
+
 
       //a.textContent = "This summer's gonna hurt like a motherfucker";
 
