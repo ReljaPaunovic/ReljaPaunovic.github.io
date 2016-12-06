@@ -33,6 +33,7 @@ body {
 }
 p {
   position: absolute;
+  color: red;
 }
   </style>
 </head>
@@ -98,6 +99,8 @@ p {
           firstTimeSwipe = false;
         }
         else{
+          str = JSON.stringify(e, null, 4);
+          a.textContent = str;
           //console.log(e.quoData.delta.x);
           deltaX = e.currentTouch.x - e.iniTouch.x;// - myElementWidth / 2;
           deltaY = e.currentTouch.y - e.iniTouch.y;// - myElementHeight / 2;
