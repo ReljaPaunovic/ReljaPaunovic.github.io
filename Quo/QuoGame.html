@@ -138,7 +138,7 @@ p {
       //var width = parseFloat($('#myElement').css('width'));
       a.textContent = "" + (e.distance/100) + " --- " + height;
       $('#myElement').css({
-        'height' : height * (e.distance/100) + 'px', 'width' : width * (e.distance/100) + 'px'
+        'height' : height * (1 + e.distance/100) + 'px', 'width' : width * (1 + e.distance/100) + 'px'
       });
 
 
