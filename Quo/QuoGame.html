@@ -136,7 +136,7 @@ p {
       //PINCHING MA MAN PINCHING, non of the below worked
       //$myElement.vendor('transform', 'scale('+e.scale+')');
       //$myElement.vendor('transform', 'scale('+e.scale+','+e.scale+')');
-      a.textContent = getMethods(e).toString();
+      a.textContent = Object.getOwnPropertyNames(e);//getMethods(e).toString();
       $myElement.css({
         'transform': 'scale('+e.scale+','+e.scale+')'
       });
