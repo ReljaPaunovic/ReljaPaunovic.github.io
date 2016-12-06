@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quo JS Game</title>
+<script type="text/javascript" src="http://cdn.jsdelivr.net/quojs/2.3.1/quo.js"></script>
+
+<div id="myElement"></div>
+<div id="console" class="console"></div>
+
+<style>
+#myElement {
+    height: 200px;
+    width: 200px;
+    background: #eee;
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.console {
+    border-left: 1px solid #eee;
+    width: 50%;
+    font: 11px "Lucida Console", Monaco, monospace;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: scroll;
+}
+  </style>
+</head>
+
+<body>
+
+<p id = "12">asdf</p>
+
+<canvas width="616" height="556" id="mazecanvas">Can't load the maze game, because your browser doesn't support HTML5.</canvas>
+
+<script>
+    var a = document.getElementById("12");
+    var canvas = document.getElementById("mazecanvas");
+    var context = canvas.getContext("2d");
+    var mazeWidth = 556;
+    var mazeHeight = 556;
+    var intervalVar;
+    function drawMaze() {
+        makeWhite(0, 0, canvas.width, canvas.height);
+        var mazeImg = new Image();
+        mazeImg.onload = function () { // when the image is loaded, draw the image, the rectangle and the circle
+            context.drawImage(mazeImg, 0, 0);
+            context.beginPath();
+            context.arc(542, 122, 7, 0, 2 * Math.PI, false);
+            context.closePath();
+            context.fillStyle = '#00FF00';
+            context.fill();
+          };
+        mazeImg.src = "simplemaze.gif";
+      }
+
+    drawMaze();
+
+    function makeWhite(x, y, w, h) {
+        context.beginPath();
+        context.rect(x, y, w, h);
+        context.closePath();
+        context.fillStyle = "white";
+        context.fill();
+    }
+
+    var $myElement = $$('#myElement'),
+    myElementHeight = $myElement.height(),
+    myElementWidth = $myElement.width();
+
+    $myElement.swiping(function(e){
+      var x = e.currentTouch.x - myElementWidth / 2;
+      var y = e.currentTouch.y - myElementHeight / 2;
+      //a.textContent = "x =" + x +" y ="+ y;
+      $myElement.vendor('transform', 'translate(' + x +'px,'+ y +'px)'); // original one
+    });
+
+    $myElement.pinching(function(e){
+      //PINCHING MA MAN PINCHING, non of the below worked
+      //$myElement.vendor('transform', 'scale('+e.scale+')');
+      //$myElement.vendor('transform', 'scale('+e.scale+','+e.scale+')');
+      a.textContent = "omg";
+      $myElement.css({
+        'transform': 'scale('+e.scale+','+e.scale+')'
+      });
+
+      a.textContent = "This summer's gonna hurt like a motherfucker";
+
+    });
+
+
+</script>
+</body>
+
+</html>
