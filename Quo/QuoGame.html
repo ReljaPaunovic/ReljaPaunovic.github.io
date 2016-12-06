@@ -3,14 +3,16 @@
 <head>
 <title>Quo JS Game</title>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/quojs/2.3.1/quo.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <div id="myElement"></div>
-<div id="console" class="console"></div>
+<!-- <div id="console" class="console"></div> -->
 
 <style>
 #myElement {
-    height: 200px;
-    width: 200px;
+    height: 70px;
+    width: 70px;
+    position: absolute;
     background: #eee;
     border-radius: 2px;
     box-shadow: 0 0 2px rgba(0,0,0,0.2);
@@ -36,6 +38,8 @@
 <canvas width="616" height="556" id="mazecanvas">Can't load the maze game, because your browser doesn't support HTML5.</canvas>
 
 <script>
+    document.getElementById("mazecanvas").setAttribute("width", window.innerWidth);
+    document.getElementById("mazecanvas").setAttribute("height", window.innerHeight);
     var a = document.getElementById("12");
     var canvas = document.getElementById("mazecanvas");
     var context = canvas.getContext("2d");
@@ -66,18 +70,50 @@
         context.fill();
     }
 
-    var $myElement = $$('#myElement'),
-    myElementHeight = $myElement.height(),
-    myElementWidth = $myElement.width();
+    var $myCanvas = $$('#mazecanvas');
+    var $myElement = $$('#myElement');
+    var myElementHeight = $myElement.height();
+    var myElementWidth = $myElement.width();
 
-    $myElement.swiping(function(e){
-      var x = e.currentTouch.x - myElementWidth / 2;
-      var y = e.currentTouch.y - myElementHeight / 2;
-      a.textContent = "x =" + x +" y ="+ y;
-      $myElement.vendor('transform', 'translate(' + x +'px,'+ y +'px)'); // original one
+    var initialPosition = {'left' : 80, 'top' : 100};
+    $('#myElement').css({
+      'left' : initialPosition.left + 'px', 'top' : initialPosition.top + 'px'
+    });
+    var deltaX = 0;
+    var deltaY = 0;
+    var cumulativeDeltaPosition = {'left' : initialPosition.left, 'top' : initialPosition.top};
+    var firstTimeSwipe = true;
+    $myCanvas.swiping(function(e){
+        if(firstTimeSwipe){
+          //swipe start
+          //$('#myElement').css({
+          //  'top' : cumulativeDeltaPosition.top + 'px', 'left' : cumulativeDeltaPosition.left + 'px'
+          //});
+          firstTimeSwipe = false;
+        }
+        else{
+          //console.log(e.quoData.delta.x);
+          deltaX = e.currentTouch.x - e.iniTouch.x;// - myElementWidth / 2;
+          deltaY = e.currentTouch.y - e.iniTouch.y;// - myElementHeight / 2;
+          //a.textContent = "x =" + x +" y ="+ y;
+          //$myElement.vendor('transform', 'translate(' + x +'px,'+ y +'px)'); // original one
+          var top = parseFloat($('#myElement').css('top'));
+          var left = parseFloat($('#myElement').css('left'));
+          a.textContent = "top : " + top + "left : " + left;
+          $('#myElement').css({
+            'top' : cumulativeDeltaPosition.top + deltaY + 'px', 'left' : cumulativeDeltaPosition.left + deltaX + 'px'
+          });
+        }
+    });
+    //Triggers at end of swipe
+    $myCanvas.swipe(function(e){
+      //console.log("omg");
+      cumulativeDeltaPosition.left += deltaX;
+      cumulativeDeltaPosition.top += deltaY;
+      firstTimeSwipe = true;
     });
 
-    $myElement.pinching(function(e){
+    $myCanvas.pinching(function(e){
       //PINCHING MA MAN PINCHING, non of the below worked
       //$myElement.vendor('transform', 'scale('+e.scale+')');
       //$myElement.vendor('transform', 'scale('+e.scale+','+e.scale+')');
