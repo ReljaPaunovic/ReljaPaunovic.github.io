@@ -40,7 +40,7 @@ p {
 
 <body>
 
-<p id = "12">asdf</p>
+<!-- <p id = "12">asdf</p> -->
 
 <canvas width="616" height="556" id="mazecanvas">Can't load the maze game, because your browser doesn't support HTML5.</canvas>
 
@@ -136,7 +136,7 @@ p {
       //});
       //var height = parseFloat($('#myElement').css('height'));
       //var width = parseFloat($('#myElement').css('width'));
-      a.textContent = "" + (1 + e.distance/100) + " --- " + height;
+      //a.textContent = "" + (1 + e.distance/100) + " --- " + height;
       $('#myElement').css({
         'height' : height * (1 + e.distance/100) + 'px', 'width' : width * (1 + e.distance/100) + 'px'
       });
@@ -146,7 +146,6 @@ p {
 
     });
     $myCanvas.pinch(function(e){
-      a.textContent = "da li?";
       height = parseFloat($('#myElement').css('height'));
       width = parseFloat($('#myElement').css('width'));
     });
