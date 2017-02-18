@@ -139,6 +139,7 @@
         }
       });
       $("#save").click( function () {
+        var end_time = Math.floor(Date.now() / 1000);
         var msg = {
           "messageType": "SAVE",
           "gameState": {
