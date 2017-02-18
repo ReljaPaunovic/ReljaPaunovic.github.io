@@ -172,6 +172,7 @@
           alert(numberOfMatches);
           for (var i = 0; i < numberOfMatches; ++i){
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
+            $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").addClass("match");
           }
           alert("working");
         } else if (evt.data.messageType === "ERROR") {
