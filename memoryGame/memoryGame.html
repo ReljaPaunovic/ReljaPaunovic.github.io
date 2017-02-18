@@ -166,9 +166,10 @@
       });
       window.addEventListener("message", function(evt) {
         if(evt.data.messageType === "LOAD") {
-          alert("LOAD LKASLDKJASLDKJASDLKJASD");
+
           start_time = Math.floor(Date.now() / 1000) - evt.data.gameState.score;
           numberOfMatches = evt.data.gameState.playerItems.length;
+          alert("LOAD asd");
           for (var i = 0; i < numberOfMatches - 1; ++i){
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
           }
