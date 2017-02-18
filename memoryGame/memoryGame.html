@@ -7,12 +7,8 @@
   <title>Memory Game</title>
   <meta name="description" content="Memory Game">
   <meta name="author" content="Relja">
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <style>
-    h1 {
-    font-size: 1.5em;
-    margin-left: 44px;
-    }
     #container { width: 800px; }
     ul { padding: 0;  margin: 0;}
     li {
@@ -30,107 +26,154 @@
       height: 100%;
     }
   </style>
+  <script>
+
+    var images = [];
+    // randomize array of images
+    function randomizeImages(){
+      Array.prototype.randomize = function(){
+        var i = this.length, j, temp;
+        while ( --i )
+        {
+          j = Math.floor( Math.random() * (i - 1) );
+          temp = this[i];
+          this[i] = this[j];
+          this[j] = temp;
+        }
+      };
+      images.randomize();
+    }
+
+    images.push("https://s16.postimg.org/zas0uyln9/image.jpg");
+    images.push("https://s16.postimg.org/zas0uyln9/image.jpg");
+
+    images.push("https://s16.postimg.org/5wwafdixh/image.png");
+    images.push("https://s16.postimg.org/5wwafdixh/image.png");
+
+    images.push("https://s16.postimg.org/4vw1q91xx/image.png");
+    images.push("https://s16.postimg.org/4vw1q91xx/image.png");
+
+    images.push("https://s16.postimg.org/iquc8pwd1/image.png");
+    images.push("https://s16.postimg.org/iquc8pwd1/image.png");
+
+    images.push("https://s16.postimg.org/bowemisr9/image.jpg");
+    images.push("https://s16.postimg.org/bowemisr9/image.jpg");
+
+    images.push("https://s16.postimg.org/cftq61kid/image.jpg");
+    images.push("https://s16.postimg.org/cftq61kid/image.jpg");
+
+    images.push("https://s16.postimg.org/vyybfej9x/image.jpg");
+    images.push("https://s16.postimg.org/vyybfej9x/image.jpg");
+
+    images.push("https://s16.postimg.org/4cvjupzx1/image.png");
+    images.push("https://s16.postimg.org/4cvjupzx1/image.png");
+    randomizeImages();
+
+    // output images then hide them
+    var output = "<ol>";
+    for (var i = 0; i < 16; i++) {
+      output += "<li>";
+      output += "<img src = '" + images[i] + "'/>";
+      output += "</li>";
+    }
+    output += "</ol>";
+
+    window.onload = function(){
+      var start_time =  Math.floor(Date.now() / 1000);
+      $("#save").click( function () {
+        var msg = {
+          "messageType": "SAVE",
+          "gameState": {
+            "playerItems": guessedPictures,
+            "score": parseFloat(end_time - start_time)
+          }
+        };
+        window.parent.postMessage(msg, "*");
+      });
+      $("#load").click( function () {
+        var msg = {
+          "messageType": "LOAD_REQUEST",
+        };
+        window.parent.postMessage(msg, "*");
+      });
+      window.addEventListener("message", function(evt) {
+        if(evt.data.messageType === "LOAD") {
+          start_time = Math.floor(Date.now() / 1000) - evt.data.gameState.score;
+          numberOfMatches = evt.data.gameState.playerItems.length;
+          for (var i = 0; i < numberOfMatches - 1; ++i){
+            $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
+          }
+        } else if (evt.data.messageType === "ERROR") {
+          alert(evt.data.info);
+        }
+      });
+
+      $("#container").html(output);
+      $("img").hide();
+
+      var guess1 = "";
+      var guess2 = "";
+      var count = 0;
+
+      var numberOfMatches = 0;
+      var guessedPictures = []
+      $("li").click(function() {
+        if ((count < 2) &&  ($(this).children("img").hasClass("face-up")) === false) {
+
+          // increment guess count, show image, mark it as face up
+          count++;
+          $(this).children("img").show();
+          $(this).children("img").addClass("face-up");
+
+          //guess #1
+          if (count === 1 ) {
+            guess1 = $(this).children("img").attr("src");
+          }
+
+          //guess #2
+          else {
+            guess2 = $(this).children("img").attr("src");
+
+            // since it's the 2nd guess check for match
+            if (guess1 === guess2) {
+              numberOfMatches++;
+              if( numberOfMatches === 8){
+                var end_time = Math.floor(Date.now() / 1000);
+                // Simulates "game over" when a score would be sent
+                var msg = {
+                  "messageType": "SCORE",
+                  "score": parseFloat(end_time - start_time)
+                };
+                window.parent.postMessage(msg, "*");
+                location.reload();
+              }
+              $("li").children("img[src='" + guess2 + "']").addClass("match");
+              guessedPictures.push($(this).children("img").attr("src"));
+            }
+            // else it's a miss
+            else {
+              setTimeout(function() {
+                $("img").not(".match").hide();
+                $("img").not(".match").removeClass("face-up");
+              }, 1000);
+            }
+
+            // reset
+            count = 0;
+            setTimeout(function() { console.clear(); }, 30000);
+          }
+        }
+      });
+    }
+
+  </script>
 </head>
 
 <body>
-  <script src="js/scripts.js">
-  var images = [];
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "1.png");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "1.png");
 
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "2.jpg");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "2.jpg");
+  <div id="container"></div>
+  <button id="save"> Save </button>
+  <button id="load"> Load </button>
 
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "3.jpg");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "3.jpg");
-
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "4.jpg");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "4.jpg");
-
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "5.png");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "5.png");
-
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "6.png");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "6.png");
-
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "7.png");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "7.png");
-
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "8.jpg");
-  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "8.jpg");
-  randomizeImages();
-
-  // output images then hide them
-  var output = "<ol>";
-  for (var i = 0; i < 16; i++) {
-    output += "<li>";
-    output += "<img src = '" + images[i] + "'/>";
-    output += "</li>";
-  }
-  output += "</ol>";
-  document.getElementById("container").innerHTML = output;
-  $("img").hide();
-
-  var guess1 = "";
-  var guess2 = "";
-  var count = 0;
-
-  $("li").click(function() {
-  if ((count < 2) &&  ($(this).children("img").hasClass("face-up")) === false) {
-
-    // increment guess count, show image, mark it as face up
-    count++;
-    $(this).children("img").show();
-    $(this).children("img").addClass("face-up");
-
-    //guess #1
-    if (count === 1 ) {
-      guess1 = $(this).children("img").attr("src");
-    }
-
-    //guess #2
-    else {
-      guess2 = $(this).children("img").attr("src");
-
-      // since it's the 2nd guess check for match
-      if (guess1 === guess2) {
-        console.log("match");
-        $("li").children("img[src='" + guess2 + "']").addClass("match");
-      }
-
-      // else it's a miss
-      else {
-        console.log("miss");
-        setTimeout(function() {
-          $("img").not(".match").hide();
-          $("img").not(".match").removeClass("face-up");
-        }, 1000);
-      }
-
-      // reset
-      count = 0;
-      setTimeout(function() { console.clear(); }, 60000);
-    }
-  }
-  });
-
-  // randomize array of images
-  function randomizeImages(){
-  Array.prototype.randomize = function()
-  {
-    var i = this.length, j, temp;
-    while ( --i )
-    {
-      j = Math.floor( Math.random() * (i - 1) );
-      temp = this[i];
-      this[i] = this[j];
-      this[j] = temp;
-    }
-  };
-
-  images.randomize();
-  }
-  </script>
-  <div id = "container"></div>
 </body>
 </html>
