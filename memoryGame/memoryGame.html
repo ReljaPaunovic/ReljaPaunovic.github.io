@@ -35,22 +35,37 @@
 <body>
   <script src="js/scripts.js">
   var images = [];
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "1.png");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "1.png");
 
-  // get images, place them in an array & randomize the order
-  for (var i = 0; i < 8; i++) {
-    var rand = Math.floor(Math.random() * (1200 - 900 + 1) + 900);
-    var img = 'http://lolcat.com/images/lolcats/' + rand + '.jpg';
-    images.push(img);
-    images.push(img);
-  }
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "2.jpg");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "2.jpg");
+
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "3.jpg");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "3.jpg");
+
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "4.jpg");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "4.jpg");
+
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "5.png");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "5.png");
+
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "6.png");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "6.png");
+
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "7.png");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "7.png");
+
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "8.jpg");
+  images.push("https://github.com/ReljaPaunovic/ReljaPaunovic.github.io/tree/master/memoryGame/img/" + "8.jpg");
   randomizeImages();
 
   // output images then hide them
   var output = "<ol>";
   for (var i = 0; i < 16; i++) {
-  output += "<li>";
-  output += "<img src = '" + images[i] + "'/>";
-  output += "</li>";
+    output += "<li>";
+    output += "<img src = '" + images[i] + "'/>";
+    output += "</li>";
   }
   output += "</ol>";
   document.getElementById("container").innerHTML = output;
