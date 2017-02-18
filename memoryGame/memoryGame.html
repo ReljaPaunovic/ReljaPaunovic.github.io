@@ -169,12 +169,11 @@
 
           start_time = Math.floor(Date.now() / 1000) - evt.data.gameState.score;
           numberOfMatches = evt.data.gameState.playerItems.length;
-          alert(numberOfMatches);
           for (var i = 0; i < numberOfMatches; ++i){
+            guessedPictures.append(evt.data.gameState.playerItems[i]);
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").addClass("match");
           }
-          alert("working");
         } else if (evt.data.messageType === "ERROR") {
           alert(evt.data.info);
         }
