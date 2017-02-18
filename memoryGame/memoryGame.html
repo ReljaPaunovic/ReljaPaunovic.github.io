@@ -173,6 +173,7 @@
           for (var i = 0; i < numberOfMatches - 1; ++i){
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
           }
+          alert("do you work");
         } else if (evt.data.messageType === "ERROR") {
           alert(evt.data.info);
         }
