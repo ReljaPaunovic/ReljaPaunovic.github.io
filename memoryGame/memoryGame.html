@@ -80,33 +80,7 @@
 
     window.onload = function(){
       var start_time =  Math.floor(Date.now() / 1000);
-      $("#save").click( function () {
-        var msg = {
-          "messageType": "SAVE",
-          "gameState": {
-            "playerItems": guessedPictures,
-            "score": parseFloat(end_time - start_time)
-          }
-        };
-        window.parent.postMessage(msg, "*");
-      });
-      $("#load").click( function () {
-        var msg = {
-          "messageType": "LOAD_REQUEST",
-        };
-        window.parent.postMessage(msg, "*");
-      });
-      window.addEventListener("message", function(evt) {
-        if(evt.data.messageType === "LOAD") {
-          start_time = Math.floor(Date.now() / 1000) - evt.data.gameState.score;
-          numberOfMatches = evt.data.gameState.playerItems.length;
-          for (var i = 0; i < numberOfMatches - 1; ++i){
-            $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
-          }
-        } else if (evt.data.messageType === "ERROR") {
-          alert(evt.data.info);
-        }
-      });
+
 
       $("#container").html(output);
       $("img").hide();
@@ -162,6 +136,33 @@
             count = 0;
             setTimeout(function() { console.clear(); }, 30000);
           }
+        }
+      });
+      $("#save").click( function () {
+        var msg = {
+          "messageType": "SAVE",
+          "gameState": {
+            "playerItems": guessedPictures,
+            "score": parseFloat(end_time - start_time)
+          }
+        };
+        window.parent.postMessage(msg, "*");
+      });
+      $("#load").click( function () {
+        var msg = {
+          "messageType": "LOAD_REQUEST",
+        };
+        window.parent.postMessage(msg, "*");
+      });
+      window.addEventListener("message", function(evt) {
+        if(evt.data.messageType === "LOAD") {
+          start_time = Math.floor(Date.now() / 1000) - evt.data.gameState.score;
+          numberOfMatches = evt.data.gameState.playerItems.length;
+          for (var i = 0; i < numberOfMatches - 1; ++i){
+            $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
+          }
+        } else if (evt.data.messageType === "ERROR") {
+          alert(evt.data.info);
         }
       });
     }
