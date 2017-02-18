@@ -79,6 +79,15 @@
     output += "</ol>";
 
     window.onload = function(){
+      var message =  {
+        messageType: "SETTING",
+        options: {
+        	"width": 800, //Integer
+          "height": 800 //Integer
+          }
+      };
+      window.parent.postMessage(message, "*");
+
       var start_time =  Math.floor(Date.now() / 1000);
 
 
