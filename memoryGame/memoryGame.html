@@ -170,7 +170,7 @@
           start_time = Math.floor(Date.now() / 1000) - evt.data.gameState.score;
           numberOfMatches = evt.data.gameState.playerItems.length;
           for (var i = 0; i < numberOfMatches; ++i){
-            guessedPictures.append(evt.data.gameState.playerItems[i]);
+            guessedPictures.push(evt.data.gameState.playerItems[i]);
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").show();
             $("li").children("img[src='" + evt.data.gameState.playerItems[i] + "']").addClass("match");
           }
